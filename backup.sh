@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 ##
 # バックアップ用スクリプト
@@ -50,8 +50,9 @@ else
 fi
 
 # 古いバックアップの削除 (ローテーション)
-echo "Cleaning up old backups (older than ${RETENTION_DAYS} days)..."
-find "${BACKUP_DIR}" -type f -name "backup_${DB_NAME}_*.sql" -mtime +${RETENTION_DAYS} -exec rm -f {} \;
+echo "debug no cleanup"
+# echo "Cleaning up old backups (older than ${RETENTION_DAYS} days)..."
+# find "${BACKUP_DIR}" -type f -name "backup_${DB_NAME}_*.sql" -mtime +${RETENTION_DAYS} -exec rm -f {} \;
 
 echo "Backup finished successfully."
 
