@@ -31,6 +31,8 @@ RETENTION_DAYS=7
 echo "=== Backup Start: ${DB_NAME} ==="
 
 # Dockerでpostgresイメージを起動し、pg_dumpでバックアップ
+# -c: バックアップに DROP 文を含める。
+# --if-exists: DROP 文に IF EXISTS を付け、オブジェクトが存在しない場合のエラーを回避する。
 docker run --rm \
   --network "${NETWORK_NAME}" \
   -e PGPASSWORD="${DB_PASSWORD}" \
@@ -39,6 +41,7 @@ docker run --rm \
   pg_dump \
     -h "${DB_HOST}" \
     -U "${DB_USER}" \
+    -c --if-exists \
     "${DB_NAME}" \
     > "${BACKUP_DIR}/${BACKUP_FILE}"
 
